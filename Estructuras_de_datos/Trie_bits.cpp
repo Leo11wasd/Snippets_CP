@@ -54,28 +54,24 @@ void elimina(TrieNode *root, int &numero)
     node->cont--;
 }
 
+//devuelve (y xor numero) donde y es el valor en el trie que minimiza el xor con numero
 void calcula(TrieNode *root, int &numero, int &res)
 {
-    //devuelve (y xor numero) donde y es el valor en el trie que minimiza el xor con numero
     TrieNode *node = root;
     int pot = (1 << 30);
     for (int i = 0; i < 31; ++i)
     {
         // cout << "veamos si hay " << !(numero & pot) << " en la potencia " << pot << endl;
-
-        if (node->hay[!((numero & pot) > 0)] > 0 && node->children[!((numero & pot) > 0)]->cont > 0)
+        if (node->hay[((numero & pot) > 0)] == 0 || node->children[((numero & pot) > 0)]->cont == 0)
         {
             // cout << "si hubo y hay " << node->children[!(numero & pot)]->cont << endl;
             // esta el q ocupo
             res += pot;
-        }
-        if (node->hay[!((numero & pot) > 0)] == 0 || node->children[!((numero & pot) > 0)]->cont == 0)
-        {
-            node = node->children[(numero & pot) > 0];
+            node = node->children[!((numero & pot) > 0)];
         }
         else
         {
-            node = node->children[!((numero & pot) > 0)];
+            node = node->children[(numero & pot) > 0];
         }
         pot >>= 1;
     }
