@@ -56,6 +56,7 @@ void elimina(TrieNode *root, int &numero)
 
 void calcula(TrieNode *root, int &numero, int &res)
 {
+    //devuelve (y xor numero) donde y es el valor en el trie que minimiza el xor con numero
     TrieNode *node = root;
     int pot = (1 << 30);
     for (int i = 0; i < 31; ++i)
