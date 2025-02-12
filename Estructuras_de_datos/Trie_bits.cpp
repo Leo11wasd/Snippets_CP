@@ -64,13 +64,13 @@ void calcula(TrieNode *root, int &numero, int &res)
         // cout << "veamos si hay " << !(numero & pot) << " en la potencia " << pot << endl;
         if (node->hay[((numero & pot) > 0)] == 0 || node->children[((numero & pot) > 0)]->cont == 0)
         {
-            // cout << "si hubo y hay " << node->children[!(numero & pot)]->cont << endl;
-            // esta el q ocupo
+            //solo habia del bit oupesto. Debemos sumar
             res += pot;
             node = node->children[!((numero & pot) > 0)];
         }
         else
         {
+            //podemos movernos al q es igual al número. No hay q sumar a res
             node = node->children[(numero & pot) > 0];
         }
         pot >>= 1;
