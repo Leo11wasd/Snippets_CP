@@ -1,4 +1,5 @@
 TEOREMA DE DILWORTH
+
 **Poset**: conjunto parcialmente ordenado. Un conjunto de elementos y un operador < que compara a dos elementos. No todos los elementos son comparables entre sí. (están relacionados)
 
 **Cadena**: Secuencia donde todos los elementos son comparables (por ejemplo una secuencia estrictamente creciente)
