@@ -1,4 +1,4 @@
-TEOREMA DE DILWORTH
+# TEOREMA DE DILWORTH
 
 **Poset**: conjunto parcialmente ordenado. Un conjunto de elementos y un operador < que compara a dos elementos. No todos los elementos son comparables entre sí. (están relacionados)
 
