@@ -12,6 +12,28 @@ void buildSegmentTree(vector<ll> &array, ll start, ll end, vector<PBDS> &tree, l
         ll mid = (start + end) / 2;
         buildSegmentTree(array, start, mid, tree, index * 2);
         buildSegmentTree(array, mid + 1, end, tree, (index * 2) + 1);
+        //// Si los nodos del arbol tienen un PBDS
+        // if (tree[index * 2].size() < tree[(index * 2) + 1].size())
+        // {
+        //     tree[index] = tree[index * 2 + 1];
+        //     for (auto x : tree[index * 2])
+        //     {
+        //         tree[index].insert(x);
+        //     }
+        // }
+        // else
+        // {
+        //     tree[index] = tree[index * 2];
+        //     for (auto x : tree[(index * 2) + 1])
+        //     {
+        //         tree[index].insert(x);
+        //     }
+        // }
+
+        //// si los nodos del arbol tienen un vector:
+        // merge(tree[2 * index].begin(), tree[2 * index].end(),
+        //       tree[(2 * index) + 1].begin(), tree[(2 * index) + 1].end(),
+        //       back_inserter(tree[index]));
         return;
     }
 }
@@ -21,7 +43,10 @@ ll query(vector<PBDS> &tree, ll startsegment, ll endsegment, ll querystart, ll q
 {
     if (startsegment >= querystart && endsegment <= queryend)
     {
+        ////si los nodos del arbol tienen un PBDS. Cuenta los que son mayores que alpha
         ll res = tree[index].size() - tree[index].order_of_key(aplha);
+        //// si los nodos del arbol tienen un vector. Cuenta los que son mayores o iguales que alpha:
+        // ll res = tree[index].size() - (lower_bound(tree[index].begin(), tree[index].end(), aplha) - tree[index].begin());
         return res;
     }
     else
@@ -39,6 +64,7 @@ ll query(vector<PBDS> &tree, ll startsegment, ll endsegment, ll querystart, ll q
         }
     }
 }
+
 // update de la forma, incrementa/decrementa en x cantidad al elemento i
 // pointupdate(tree, 0, myvector.size() - 1, i, x, 1);
 
