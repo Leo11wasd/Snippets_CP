@@ -1,15 +1,15 @@
 /*
-Código de ejemplo que recibe un grafo dirigido y regresa dos vectores que indican la secuencia de
+Código de ejemplo que recibe un grafo NO dirigido y regresa dos vectores que indican la secuencia de
 nodos y aristas que se deben seguir para recorrer un camino euleriano en un grafo.
 
 Un camino euleriano sobre un grafo es un camino que pasa por todas las aristas exactamente 1 vez
 
 La idea del algoritmo es hacer una dfs e ir "eliminando" las aristas por las que pasamos.
-Cada que nos encontramos con un nodo al que ya no le quedan aristas a la que ir, lo agregamos al inicio 
+Cada que nos encontramos con un nodo al que ya no le quedan aristas a la que ir, lo agregamos al inicio
 de nuestro vector respuesta.
 
-Al inicio hay que verificar que el camino exista (todos los nodos tienen indegree==outdegree o hay exactamente
-uno que tiene indegree==outdegree+1 y exactamente uno que tiene indegree+1==outdegree+1)
+Al inicio hay que verificar que el camino exista (todos los nodos tienen grado par o hay exactamente 2 o 0
+nodos con grado impar)
 */
 
 #include <iostream>
@@ -25,17 +25,22 @@ typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_up
 ll mx = INT64_MAX;
 ll mn = INT64_MIN;
 
-void dfs(ll actual, ll aristapre, ll &sigpos, vector<ll> &nodos_res, vector<ll> &aristas_res, vector<ll> &out, vector<vector<pair<ll, ll>>> &adj, vector<ll> &siguiente)
+void dfs(ll actual, ll aristapre, ll &sigpos, vector<ll> &nodos_res, vector<ll> &aristas_res, vector<ll> &out, vector<vector<pair<ll, ll>>> &adj, vector<ll> &siguiente, vector<bool> &usado)
 {
-    ll vecino, i;
+    ll vecino, i, arista;
     while (siguiente[actual] < adj[actual].size())
     {
         i = siguiente[actual];
         siguiente[actual]++;
         vecino = adj[actual][i].first;
+        arista = adj[actual][i].second;
 
-        out[actual]--;
-        dfs(vecino, adj[actual][i].second, sigpos, nodos_res, aristas_res, out, adj, siguiente);
+        if (!usado[arista])
+        {
+            usado[arista] = 1;
+            out[actual]--;
+            dfs(vecino, arista, sigpos, nodos_res, aristas_res, out, adj, siguiente, usado);
+        }
     }
 
     nodos_res[sigpos] = actual;
@@ -48,15 +53,16 @@ void dfs(ll actual, ll aristapre, ll &sigpos, vector<ll> &nodos_res, vector<ll> 
     return;
 }
 
-pair<vector<ll>, vector<ll>> eulerian(ll n, ll m, ll &sigpos, vector<vector<pair<ll, ll>>> &adj, vector<ll> &in, vector<ll> &out)
+pair<vector<ll>, vector<ll>> eulerian(ll n, ll m, ll &sigpos, vector<vector<pair<ll, ll>>> &adj, vector<ll> &grado)
 {
     //asume que ya se verificó que existe solución
     //sigpos=m
     vector<ll> nodos(m + 1, -1), aristas(m, -1), siguiente(n, 0);
+    vector<bool> usado(m, 0);
     ll ini = -1;
     for (int i = 0; i < n; i++)
     {
-        if ((in[i] + 1) == out[i])
+        if ((grado[i] % 2) == 1)
         {
             ini = i;
         }
@@ -65,13 +71,13 @@ pair<vector<ll>, vector<ll>> eulerian(ll n, ll m, ll &sigpos, vector<vector<pair
     {
         for (int i = 0; i < n; i++)
         {
-            if (in[i] > 0)
+            if (grado[i] > 0)
             {
                 ini = i;
             }
         }
     }
-    dfs(ini, -1, sigpos, nodos, aristas, out, adj, siguiente);
+    dfs(ini, -1, sigpos, nodos, aristas, grado, adj, siguiente, usado);
 
     return {nodos, aristas};
 }
@@ -90,54 +96,37 @@ void solved()
     }
     vector<vector<pair<ll, ll>>> adj(n, vector<pair<ll, ll>>());
 
-    vector<ll> in(n, 0), out(n, 0);
+    vector<ll> grado(n, 0);
     for (int i = 0; i < m; i++)
     {
         cin >> u >> v;
         adj[u].push_back({v, i});
-
-        out[u]++;
-        in[v]++;
+        adj[v].push_back({u, i});
+        grado[v]++;
+        grado[u]++;
     }
-    bool mas_in, mas_out, sepuede;
-    mas_in = mas_out = 0;
-    sepuede = 1;
+    ll impares, pares;
+    pares = impares = 0;
     for (int i = 0; i < n; i++)
     {
-        if (in[i] != out[i])
+        // cout << "grado de " << i << " " << grado[i] << endl;
+        if (grado[i] & 1)
         {
-            if (in[i] == out[i] + 1)
-            {
-                if (mas_in)
-                {
-                    sepuede = 0;
-                }
-                mas_in = 1;
-            }
-            else if (in[i] + 1 == out[i])
-            {
-                if (mas_out)
-                {
-                    sepuede = 0;
-                }
-                mas_out = 1;
-            }
-            else
-            {
-                sepuede = 0;
-            }
+            impares++;
+        }
+        else
+        {
+            pares++;
         }
     }
-
-    if (!sepuede)
+    if (impares >= 3)
     {
-
         cout << "No\n";
     }
     else
     {
         ll sigpos = m;
-        auto [nodos, aristas] = eulerian(n, m, sigpos, adj, in, out);
+        auto [nodos, aristas] = eulerian(n, m, sigpos, adj, grado);
         // cout << "sigpos " << sigpos << endl;
         if (sigpos != -1)
         {
