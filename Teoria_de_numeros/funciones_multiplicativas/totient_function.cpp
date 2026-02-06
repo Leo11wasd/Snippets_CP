@@ -1,4 +1,3 @@
-ll n;
 void phi_1_to_n(vector<ll> &phi)
 {
     for (ll i = 0; i <= n; i++)
@@ -13,13 +12,13 @@ void phi_1_to_n(vector<ll> &phi)
         }
     }
 }
-
-
-
-int phi(int n) {
-    int result = n;
-    for (int i = 2; i * i <= n; i++) {
-        if (n % i == 0) {
+ll phi(ll n)
+{
+    ll result = n;
+    for (ll i = 2; i * i <= n; i++)
+    {
+        if (n % i == 0)
+        {
             while (n % i == 0)
                 n /= i;
             result -= result / i;
