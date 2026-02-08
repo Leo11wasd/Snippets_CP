@@ -1,6 +1,6 @@
 ## Exponenciación de matrices
 
-El código de matrix_exponentiation permite elevar una matriz cuadrada de kxk en tiempo \(O(k^3 log n)\).
+El código de matrix_exponentiation.cpp permite elevar una matriz cuadrada de kxk en tiempo \(O(k^3 log n)\).
 
 En el contexto de la programación competitiva, es útil para:
 - Calcular recurrencias lineales.
