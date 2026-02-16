@@ -1,0 +1,6 @@
+## Dijkstra
+
+El código de Dijkstra.cpp nos permite obtener el costo del camino más corto en un grafo dirigido en O((V+E)logV).
+
+Inicialmente, el algoritmo toma como la distancia desde el nodo fuente hacia cualquier otro nodo d[i][j]=INF un número grande. Para los vecinos directos del nodo fuente, d[i][j] es el peso de la arista que los une.
+Utilizamos una priority queue q en la que en el tope estará el nodo que más cerca se encuentra del nodo fuente (al que menos cuesta llegar). En cada paso, tomaremos al tope de la fila e iremos a sus vecinos, actualizando su valor d[i][j] si el costo de llegar al tope de la fila desde la fuente + el costo de movernos a ese vecino del tope es menor que el costo actual d[i][j]. En caso de actualizarlo, actualizaremos su valor d[i][j] e insertaremos al nodo con su nuevo valor de distancia a la fuente. Haremos esto hasta que la fila quede vacía y verificaremos finalmente d[fuente][objetivo]. Si esta valor es INF, entonces el objetivo es inalcanzable desde la fuente.
