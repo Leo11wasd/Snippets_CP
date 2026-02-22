@@ -25,7 +25,7 @@ typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_up
 ll mx = INT64_MAX;
 ll mn = INT64_MIN;
 
-void dfs(ll actual, ll aristapre, ll &sigpos, vector<ll> &nodos_res, vector<ll> &aristas_res, vector<ll> &out, vector<vector<pair<ll, ll>>> &adj, vector<ll> &siguiente, vector<bool> &usado)
+void dfs(ll actual, ll aristapre, ll &sigpos, vector<ll> &nodos_res, vector<ll> &aristas_res, vector<vector<pair<ll, ll>>> &adj, vector<ll> &siguiente, vector<bool> &usado)
 {
     ll vecino, i, arista;
     while (siguiente[actual] < adj[actual].size())
@@ -38,8 +38,7 @@ void dfs(ll actual, ll aristapre, ll &sigpos, vector<ll> &nodos_res, vector<ll> 
         if (!usado[arista])
         {
             usado[arista] = 1;
-            out[actual]--;
-            dfs(vecino, arista, sigpos, nodos_res, aristas_res, out, adj, siguiente, usado);
+            dfs(vecino, arista, sigpos, nodos_res, aristas_res, adj, siguiente, usado);
         }
     }
 
@@ -55,9 +54,9 @@ void dfs(ll actual, ll aristapre, ll &sigpos, vector<ll> &nodos_res, vector<ll> 
 
 pair<vector<ll>, vector<ll>> eulerian(ll n, ll m, ll &sigpos, vector<vector<pair<ll, ll>>> &adj, vector<ll> &grado)
 {
-    //asume que ya se verificó que existe solución
-    //sigpos=m
-    vector<ll> nodos(m + 1, -1), aristas(m, -1), siguiente(n, 0);
+    // asume que ya se verificó que existe solución
+    sigpos = m + n + 2;
+    vector<ll> nodos(sigpos + 1, -1), aristas(sigpos, -1), siguiente(n, 0);
     vector<bool> usado(m, 0);
     ll ini = -1;
     for (int i = 0; i < n; i++)
@@ -77,11 +76,10 @@ pair<vector<ll>, vector<ll>> eulerian(ll n, ll m, ll &sigpos, vector<vector<pair
             }
         }
     }
-    dfs(ini, -1, sigpos, nodos, aristas, grado, adj, siguiente, usado);
+    dfs(ini, -1, sigpos, nodos, aristas, adj, siguiente, usado);
 
     return {nodos, aristas};
 }
-
 //====================================================================
 //                          MAIN
 //====================================================================

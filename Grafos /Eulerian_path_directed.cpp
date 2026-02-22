@@ -25,7 +25,7 @@ typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_up
 ll mx = INT64_MAX;
 ll mn = INT64_MIN;
 
-void dfs(ll actual, ll aristapre, ll &sigpos, vector<ll> &nodos_res, vector<ll> &aristas_res, vector<ll> &out, vector<vector<pair<ll, ll>>> &adj, vector<ll> &siguiente)
+void dfs(ll actual, ll aristapre, ll &sigpos, vector<ll> &nodos_res, vector<ll> &aristas_res, vector<vector<pair<ll, ll>>> &adj, vector<ll> &siguiente)
 {
     ll vecino, i;
     while (siguiente[actual] < adj[actual].size())
@@ -34,8 +34,7 @@ void dfs(ll actual, ll aristapre, ll &sigpos, vector<ll> &nodos_res, vector<ll> 
         siguiente[actual]++;
         vecino = adj[actual][i].first;
 
-        out[actual]--;
-        dfs(vecino, adj[actual][i].second, sigpos, nodos_res, aristas_res, out, adj, siguiente);
+        dfs(vecino, adj[actual][i].second, sigpos, nodos_res, aristas_res, adj, siguiente);
     }
 
     nodos_res[sigpos] = actual;
@@ -50,9 +49,9 @@ void dfs(ll actual, ll aristapre, ll &sigpos, vector<ll> &nodos_res, vector<ll> 
 
 pair<vector<ll>, vector<ll>> eulerian(ll n, ll m, ll &sigpos, vector<vector<pair<ll, ll>>> &adj, vector<ll> &in, vector<ll> &out)
 {
-    //asume que ya se verificó que existe solución
-    //sigpos=m
-    vector<ll> nodos(m + 1, -1), aristas(m, -1), siguiente(n, 0);
+    // asume que ya se verificó que existe solución
+    sigpos = m + n;
+    vector<ll> nodos(sigpos + 1, -1), aristas(sigpos, -1), siguiente(n, 0);
     ll ini = -1;
     for (int i = 0; i < n; i++)
     {
@@ -71,10 +70,11 @@ pair<vector<ll>, vector<ll>> eulerian(ll n, ll m, ll &sigpos, vector<vector<pair
             }
         }
     }
-    dfs(ini, -1, sigpos, nodos, aristas, out, adj, siguiente);
+    dfs(ini, -1, sigpos, nodos, aristas, adj, siguiente);
 
     return {nodos, aristas};
 }
+
 
 //====================================================================
 //                          MAIN
