@@ -1,4 +1,4 @@
-# totient_function
+# Euler's totient function
 
 ## Complexity
 

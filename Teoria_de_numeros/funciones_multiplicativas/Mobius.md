@@ -1,4 +1,4 @@
-# Mobius
+# Mobius inversion
 
 ## Complexity
 

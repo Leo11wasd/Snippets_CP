@@ -1,4 +1,4 @@
-# suma_de_divisores
+# Función sigma (suma de divisores)
 
 ## Complexity
 
