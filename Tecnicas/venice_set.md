@@ -9,11 +9,11 @@ Whenever we want to answer queries of the form:
 Instead of using a complex data structure or another one with some workarounds, we can use a simple multiset and think of the following analogy: Instead of adding or deleting numbers, think of building and demolishing buildings. The add v to all elements operation turns into add/remove v floors from all buildings. Instead of going building by building removing the floors, we can remove building floors by flooding (thus the "Venice" name of the technique) v floors. We maintain a simple multiset and a variable water_level to emulate the same idea with the members of our set.
 ## Complexity
 ### add
-- Time: **O(log(n))**
+- Time: $O(\log{N})$
 ### remove
-- Time: **O(log(n))**
+- Time: $O(\log{N})$
 ### updateAll
-- Time: **O(1)**
+- Time: $O(1)$
 
 ## Notes
 

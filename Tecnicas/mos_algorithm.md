@@ -1,13 +1,25 @@
 # Mo's algorithm
 
+Whenever we have a problem for which we have to answer range queries over some array, we can do the following :
+- Expand the subarray: Get the answer for some subarray **[l-1,r]** or **[l,r+1]** from the array **[l,r]**;(ideally in **O(1)** time)
+- Contract the subarray: Get the answer for some subarray **[l+1,r]** or **[l,r-1]** from the array **[l,r]**; (ideally in **O(1)** time)
+- The queries can be answered offline
+
+We can sort the queries in some intelligent way such that it enables us to answer them using only contraction and expansion operations.
+
+We can split the array in blocks of size $\sqrt{N}$ and answer the queries depending on which block they start in.
+
+We will first answer all queries which have the left index in block 0, then answer all queries which have left index in block 1 and so on. And also we will have to answer the queries of a block in a special order, namely sorted by the right index of the queries.
+
+
+
 ## Complexity
 
-- Time:
-- Memory:
+- Time:$O((N+Q)\sqrt{N})$
 
 ## Notes
 
--
+- https://cp-algorithms.com/data_structures/sqrt_decomposition.html#mos-algorithm
 
 ## Code
 
