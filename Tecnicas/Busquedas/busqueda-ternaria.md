@@ -1,13 +1,17 @@
-# Busqueda ternaria
+# Ternary search
+
+The typical formulation of a problem which can be solved through ternary search is the following: Given a convex function, find its minimum/maximum.
+Univariate convex functions are u or n shaped functions. They satisfy $f(x-\epsilon)\leq f(x) \geq f(x+\epsilon)$ or $f(x-\epsilon)\geq f(x) \leq f(x+\epsilon)$ for a unique value x.
+
+For CP problems, The evaluation of $f(x)$ is usually cheap/easy to implement but its not feasable to calculate it for all x values in some range of interest. If we now that our function is convex, we can find $x$ using a similar approach as the binary search one: Choose two element $m_1,m_2 \in [L,R]$ the current range. Evaluate $f(m_1) and f(m_2)$ and check whether $f(m_1)<f(m_2)$. Shorten the range depending on the result and the shape of $f$.
 
 ## Complexity
 
-- Time:
-- Memory:
+- Time: $O(\log_3{N})$
 
 ## Notes
 
--
+- https://cp-algorithms.com/num_methods/ternary_search.html
 
 ## Code
 
