@@ -12,8 +12,9 @@
 ## Code
 
 ```cpp
-vector<vector<int>> g, t, rg, bucket; // t = dominator tree of the nodes reachable from root
+vector<vector<int>> g, t, rg, bucket; // t = dominator tree of the nodes reachable from root. 
 vector<int> sdom, par, idom, dsu, label, id, rev;
+// para vector<int> y vector<vector<int>>:  todos de tamaño n+1
 int T=0; //timer para registrar tin
 int find_(int u, int x = 0)
 {
