@@ -1,4 +1,4 @@
-# Implicit Treap
+# Divide and conquer dp optimization
 
 ## Complexity
 
