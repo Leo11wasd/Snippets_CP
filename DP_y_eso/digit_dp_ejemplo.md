@@ -7,17 +7,17 @@
 
 ## Notes
 
--
+- La idea es probar en cada posición del número a rellenar que dígitos podemos colocar. 
+Si en una posición de previa (que valen más) ya asegure que el número que estamos creando 
+es menor que el límite a, entonces en esta posición se puede colocar cualquier dígito, 
+caso contrario, el dígito no puede ser mayor que el dígito de a en esta posición
+
+- Código de ejemplo básico para calcular cuántos números entre 0 y a cumplen que la suma de sus dígitos es d
+
 
 ## Code
 
 ```cpp
-// La idea es probar en cada posición del número a rellenar que dígitos podemos colocar. 
-// Si en una posición de previa (que valen más) ya asegure que el número que estamos creando 
-// es menor que el límite a, entonces en esta posición se puede colocar cualquier dígito, 
-// caso contrario, el dígito no puede ser mayor que el dígito de a en esta posición
-
-// Código de ejemplo básico para calcular cuántos números entre 0 y a cumplen que la suma de sus dígitos es d
 
 // dp[cantidad_de_digitos][suma%d][bool_enrango]
 ll dp[10005][100][2];

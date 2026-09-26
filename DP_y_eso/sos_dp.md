@@ -7,18 +7,17 @@
 
 ## Notes
 
--
 
+Given a list of n integers, your task is to calculate for each element x:
+- a) the number of elements y such that x | y = x (submascaras de x)
+- b) the number of elements y such that x & y = x (supermascaras de x)
+- c) the number of elements y such that x & y != 0
+
+dónde | y & son operadores bitwise
 ## Code
 
 ```cpp
-/*
-   Given a list of n integers, your task is to calculate for each element x:
-   a) the number of elements y such that x | y = x (submascaras de x)
-   b) the number of elements y such that x & y = x (supermascaras de x)
-   c) the number of elements y such that x & y != 0
-   dónde | y & son operadores bitwise
-   */
+
    ll n, val;
    cin >> n;
    vector<ll> a(3e6 + 2, 0), b(3e6 + 2, 0), v(n);

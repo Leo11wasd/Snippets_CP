@@ -7,24 +7,21 @@
 
 ## Notes
 
--
+- Código de ejemplo que recibe un grafo dirigido y regresa dos vectores que indican la secuencia de
+nodos y aristas que se deben seguir para recorrer un camino euleriano en un grafo.
+
+- Un camino euleriano sobre un grafo es un camino que pasa por todas las aristas exactamente 1 vez
+
+- La idea del algoritmo es hacer una dfs e ir "eliminando" las aristas por las que pasamos.
+Cada que nos encontramos con un nodo al que ya no le quedan aristas a la que ir, lo agregamos al inicio 
+de nuestro vector respuesta.
+
+- Al inicio hay que verificar que el camino exista (todos los nodos tienen indegree==outdegree o hay exactamente
+uno que tiene indegree==outdegree+1 y exactamente uno que tiene indegree+1==outdegree+1)
 
 ## Code
 
 ```cpp
-/*
-Código de ejemplo que recibe un grafo dirigido y regresa dos vectores que indican la secuencia de
-nodos y aristas que se deben seguir para recorrer un camino euleriano en un grafo.
-
-Un camino euleriano sobre un grafo es un camino que pasa por todas las aristas exactamente 1 vez
-
-La idea del algoritmo es hacer una dfs e ir "eliminando" las aristas por las que pasamos.
-Cada que nos encontramos con un nodo al que ya no le quedan aristas a la que ir, lo agregamos al inicio 
-de nuestro vector respuesta.
-
-Al inicio hay que verificar que el camino exista (todos los nodos tienen indegree==outdegree o hay exactamente
-uno que tiene indegree==outdegree+1 y exactamente uno que tiene indegree+1==outdegree+1)
-*/
 
 #include <iostream>
 #include <bits/stdc++.h>
