@@ -58,13 +58,13 @@ void dnc(int k, int l, int r, int optl, int optr)
     int mid = l + ((r - l) / 2);
     // pair<int, int> best = {1e17, optl};
     int best, idx;
-    best = dp[optl][k - 1] + func[optl + 1][mid];
+    best = dp[optl][k - 1] + cost[optl + 1][mid];
     idx = optl;
     for (int i = optl; i <= min(mid - 1, optr); i++)
     {
-        if (best > dp[i][k - 1] + func[i + 1][mid])
+        if (best > dp[i][k - 1] + cost[i + 1][mid])
         {
-            best = dp[i][k - 1] + func[i + 1][mid];
+            best = dp[i][k - 1] + cost[i + 1][mid];
             idx = i;
         }
     }
@@ -79,7 +79,7 @@ void dnc(int k, int l, int r, int optl, int optr)
 //en main, precalculamos dp[i][1]
 for (int i = 0; i < n; i++)
 {
-    dp[i][1] = func[0][i];
+    dp[i][1] = cost[0][i];
 }
 //calculamos el resto
 for (int i = 2; i <= k; i++)
